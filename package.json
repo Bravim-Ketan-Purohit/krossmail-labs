@@ -1,0 +1,19 @@
+{
+  "name": "kross",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Kross — AI-powered unified email + calendar (Gmail + Outlook).",
+  "workspaces": [
+    "frontend",
+    "packages/*",
+    "services/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace @kross/frontend",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main, staging]
+  pull_request:
+
+jobs:
+  node:
+    name: Lint, test & build (Node)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Unit + integration tests (all workspaces)
+        run: npm run test --workspaces --if-present
+      - name: Build frontend
+        run: npm run build --workspace @kross/frontend
+
+  iac:
+    name: Terraform validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - name: Format check
+        run: terraform fmt -check -recursive terraform
+      - name: Validate staging
+        working-directory: terraform/envs/staging
+        run: |
+          terraform init -backend=false -input=false
+          terraform validate
+      # Security scanning (tfsec / checkov) runs here once policies are tuned.
+
+  # Trivy image scan + multi-stage docker builds run in the deploy pipeline
+  # (staging auto, prod manual gate) — see CLAUDE.md CI/CD section.

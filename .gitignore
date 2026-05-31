@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Builds
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# Test / coverage
+coverage/
+playwright-report/
+test-results/
+.playwright-mcp/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.example.tfvars
+crash.log
+
+# Env / secrets
+.env
+.env*.local
+*.pem
+
+# OS / editor
+.DS_Store
+*.pem
+.vscode/
+.idea/
+
+# Local screenshots (prototype QA artifacts)
+/*.png
+
+# Logs
+*.log
+npm-debug.log*

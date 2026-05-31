@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nexus Mail - Calendar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#c1c1ff",
+                        "on-secondary-container": "#bea8ff",
+                        "on-primary": "#1500a8",
+                        "inverse-surface": "#e5e2e1",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "primary": "#c1c1ff",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-primary-fixed-variant": "#2b20d2",
+                        "on-surface-variant": "#c7c4d8",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#4f319c",
+                        "on-background": "#e5e2e1",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-highest": "#353534",
+                        "surface-container-low": "#1c1b1b",
+                        "on-secondary-fixed": "#21005e",
+                        "inverse-primary": "#4643e9",
+                        "surface-tint": "#c1c1ff",
+                        "secondary-fixed-dim": "#cebdff",
+                        "surface-container": "#201f1f",
+                        "tertiary-container": "#bf5200",
+                        "on-tertiary": "#552000",
+                        "on-tertiary-container": "#fff9f7",
+                        "on-error": "#690005",
+                        "secondary-fixed": "#e8ddff",
+                        "background": "#131313",
+                        "tertiary-fixed": "#ffdbcb",
+                        "outline": "#908fa1",
+                        "primary-fixed": "#e1dfff",
+                        "on-primary-container": "#fdf9ff",
+                        "on-secondary": "#381385",
+                        "secondary-container": "#4f319c",
+                        "tertiary": "#ffb691",
+                        "on-primary-fixed": "#09006b",
+                        "surface-variant": "#353534",
+                        "on-surface": "#e5e2e1",
+                        "surface-bright": "#3a3939",
+                        "inverse-on-surface": "#313030",
+                        "surface": "#131313",
+                        "surface-dim": "#131313",
+                        "secondary": "#cebdff",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed": "#341100",
+                        "outline-variant": "#464556",
+                        "primary-container": "#5d5cff",
+                        "on-tertiary-fixed-variant": "#793100"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "12px",
+                        "max-width-content": "1200px",
+                        "stack-lg": "24px",
+                        "stack-sm": "4px",
+                        "unit": "8px",
+                        "gutter": "16px",
+                        "container-margin": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "label-md": ["Geist"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #e5e2e1;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .ai-shimmer {
+            background: linear-gradient(90deg, transparent, rgba(193, 193, 255, 0.1), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite linear;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .calendar-grid-cell {
+            aspect-ratio: 1 / 1;
+            transition: background-color 0.2s;
+        }
+        .calendar-grid-cell:hover {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md">
+<!-- SideNavBar Anchor -->
+<nav class="fixed left-0 top-0 bottom-0 flex flex-col p-container-margin w-[280px] h-screen border-r border-outline-variant bg-surface dark:bg-surface z-50">
+<div class="mb-stack-lg">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary">Nexus Mail</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">AI-Powered</p>
+</div>
+<button class="mb-stack-lg flex items-center justify-center gap-unit bg-primary-container text-on-primary-container rounded-xl py-3 px-6 font-bold active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined">add</span>
+            Compose
+        </button>
+<div class="flex flex-col gap-stack-sm flex-grow">
+<a class="flex items-center gap-stack-md p-stack-md rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">inbox</span>
+                Inbox
+            </a>
+<!-- ACTIVE TAB: Calendar -->
+<a class="flex items-center gap-stack-md p-stack-md rounded-lg text-primary dark:text-primary font-bold hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+                Calendar
+            </a>
+<a class="flex items-center gap-stack-md p-stack-md rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">drafts</span>
+                Drafts
+            </a>
+<a class="flex items-center gap-stack-md p-stack-md rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">send</span>
+                Sent
+            </a>
+<a class="flex items-center gap-stack-md p-stack-md rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">delete</span>
+                Trash
+            </a>
+</div>
+<div class="mt-auto flex flex-col gap-stack-sm border-t border-outline-variant pt-stack-lg">
+<a class="flex items-center gap-stack-md p-stack-md rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-stack-md p-stack-md rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+                Help
+            </a>
+<div class="flex items-center gap-stack-md p-stack-md mt-stack-md">
+<img alt="User Profile" class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A professional headshot of a person with a slight smile, illuminated by soft cinematic lighting. The individual has a modern appearance, suitable for a tech professional. The background is a clean, out-of-focus urban environment with subtle blue and violet tones to match a premium dark-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUuiWsNoa2Ep9dACyH-jS1eZfejQrSuvAZb6u5DTnKFOeRJspmBYnzuQ8nHWQeCwHIZAsXczYvVKbNdsTfCE102s13I9nWXYwpKZhh992PQLfK7Yh3NGzAXlfMctGpamPVblFKQm2-4C3zUajt7mihOthVMOm-SCMa7zemF0CUL_S_sIbX3AdB_EnhlJmlJtDsNSvkTNM3QwBeWpHKPj8l28MpV6AmkbJDb5ydLQ1S3pmIR37Gthopqo8StzewOWn9nN4POYA-gD7q"/>
+<div>
+<p class="text-body-sm font-bold">Alex Chen</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest">Pro Tier</p>
+</div>
+</div>
+</div>
+</nav>
+<!-- TopNavBar Anchor -->
+<header class="sticky top-0 right-0 flex items-center justify-between px-gutter w-[calc(100%-280px)] ml-[280px] h-16 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl z-40">
+<div class="flex items-center gap-stack-lg">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant">search</span>
+<input class="bg-surface-container-low border-none rounded-full pl-10 pr-4 py-2 w-80 text-body-sm focus:ring-2 focus:ring-primary transition-all" placeholder="Search events, bookings, or meetings..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-stack-lg">
+<button class="bg-primary text-on-primary font-bold px-4 py-1.5 rounded-full text-body-sm active:scale-95 transition-transform">
+                Ask AI
+            </button>
+<div class="flex items-center gap-stack-md text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">account_circle</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[280px] p-container-margin grid grid-cols-12 gap-stack-lg max-w-[1400px]">
+<!-- Left Column: Calendar Grid -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-stack-lg">
+<!-- Calendar Header -->
+<div class="flex items-center justify-between glass-panel p-6 rounded-2xl">
+<div class="flex items-center gap-stack-lg">
+<h2 class="font-headline-sm text-headline-sm">October 2023</h2>
+<div class="flex border border-outline-variant rounded-lg overflow-hidden">
+<button class="p-2 hover:bg-surface-container-high transition-colors border-r border-outline-variant">
+<span class="material-symbols-outlined text-body-md">chevron_left</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-body-md">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex gap-stack-md">
+<button class="px-4 py-1.5 rounded-lg border border-outline-variant text-body-sm hover:bg-surface-container-high transition-colors">Day</button>
+<button class="px-4 py-1.5 rounded-lg border border-outline-variant text-body-sm hover:bg-surface-container-high transition-colors">Week</button>
+<button class="px-4 py-1.5 rounded-lg bg-surface-container-highest text-primary font-bold text-body-sm">Month</button>
+</div>
+</div>
+<!-- Grid -->
+<div class="glass-panel rounded-2xl overflow-hidden">
+<!-- Day Names -->
+<div class="grid grid-cols-7 border-b border-outline-variant">
+<div class="p-4 text-center text-label-md text-on-surface-variant font-medium">SUN</div>
+<div class="p-4 text-center text-label-md text-on-surface-variant font-medium">MON</div>
+<div class="p-4 text-center text-label-md text-on-surface-variant font-medium">TUE</div>
+<div class="p-4 text-center text-label-md text-on-surface-variant font-medium">WED</div>
+<div class="p-4 text-center text-label-md text-on-surface-variant font-medium">THU</div>
+<div class="p-4 text-center text-label-md text-on-surface-variant font-medium">FRI</div>
+<div class="p-4 text-center text-label-md text-on-surface-variant font-medium">SAT</div>
+</div>
+<!-- Days Grid -->
+<div class="grid grid-cols-7 border-outline-variant">
+<!-- Week 1 (Partial) -->
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 opacity-30 text-body-sm">28</div>
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 opacity-30 text-body-sm">29</div>
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 opacity-30 text-body-sm">30</div>
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 text-body-sm">1</div>
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 text-body-sm">2</div>
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 text-body-sm">3</div>
+<div class="calendar-grid-cell border-b border-outline-variant p-2 text-body-sm">4</div>
+<!-- Week 2 -->
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 text-body-sm">5</div>
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 text-body-sm">6</div>
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 text-body-sm">7</div>
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 text-body-sm">8</div>
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 text-body-sm">
+<span>9</span>
+<div class="mt-2 flex flex-col gap-1">
+<div class="bg-primary-container text-[10px] p-1 rounded-md text-on-primary-container truncate font-medium">Product Sync</div>
+</div>
+</div>
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 text-body-sm">10</div>
+<div class="calendar-grid-cell border-b border-outline-variant p-2 text-body-sm">11</div>
+<!-- Week 3 -->
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 text-body-sm">12</div>
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 text-body-sm relative">
+<span class="bg-primary text-on-primary w-6 h-6 flex items-center justify-center rounded-full">13</span>
+<div class="mt-2 flex flex-col gap-1">
+<div class="bg-secondary-container text-[10px] p-1 rounded-md text-on-secondary-container truncate font-medium">Board Meeting</div>
+<div class="bg-tertiary-container text-[10px] p-1 rounded-md text-on-tertiary-container truncate font-medium">AI Strategy</div>
+</div>
+</div>
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 text-body-sm">14</div>
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 text-body-sm">15</div>
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 text-body-sm">16</div>
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 text-body-sm">17</div>
+<div class="calendar-grid-cell border-b border-outline-variant p-2 text-body-sm">18</div>
+<!-- Week 4 -->
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 text-body-sm">19</div>
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 text-body-sm">20</div>
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 text-body-sm">21</div>
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 text-body-sm">22</div>
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 text-body-sm">23</div>
+<div class="calendar-grid-cell border-b border-r border-outline-variant p-2 text-body-sm">24</div>
+<div class="calendar-grid-cell border-b border-outline-variant p-2 text-body-sm">25</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Side Panel & Scheduling -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-stack-lg">
+<!-- AI Summary Card -->
+<div class="relative glass-panel rounded-2xl p-6 border-l-4 border-primary">
+<div class="ai-shimmer absolute inset-0 opacity-10 rounded-2xl"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-stack-md mb-stack-md">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+<h3 class="font-bold text-primary">AI Insight</h3>
+</div>
+<p class="text-body-sm text-on-surface mb-stack-lg leading-relaxed">
+                        You have a 2-hour deep work block starting at 2 PM. I've silenced notifications and drafted responses to three incoming meeting requests.
+                    </p>
+<button class="text-primary font-bold text-body-sm flex items-center gap-unit hover:underline">
+                        Optimize Schedule <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Upcoming Video Call Card -->
+<div class="glass-panel rounded-2xl p-6">
+<div class="flex items-center justify-between mb-stack-lg">
+<h3 class="font-bold">Next Up</h3>
+<span class="text-[10px] bg-error-container text-on-error-container px-2 py-0.5 rounded uppercase font-bold tracking-tighter">Live in 5m</span>
+</div>
+<div class="flex items-start gap-stack-md mb-stack-lg">
+<div class="bg-primary/20 p-3 rounded-xl">
+<span class="material-symbols-outlined text-primary">video_camera_front</span>
+</div>
+<div>
+<h4 class="font-bold text-body-md">Quarterly Revenue Review</h4>
+<p class="text-body-sm text-on-surface-variant">10:00 AM — 11:30 AM</p>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary font-bold py-3 rounded-xl flex items-center justify-center gap-stack-md hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">video_chat</span>
+                    Join Meeting
+                </button>
+</div>
+<!-- Scheduling / Booking Section -->
+<div class="glass-panel rounded-2xl p-6 flex flex-col gap-stack-lg">
+<div class="flex items-center justify-between">
+<h3 class="font-bold">Booking Links</h3>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">add</span>
+</div>
+<div class="flex flex-col gap-stack-md">
+<!-- Booking Item 1 -->
+<div class="p-4 bg-surface-container-low rounded-xl border border-outline-variant/30 hover:border-primary/50 transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-unit">
+<span class="text-body-sm font-bold">15 Min Coffee Chat</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-primary">content_copy</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mb-stack-md">Brief intro or quick sync.</p>
+<div class="flex gap-stack-sm">
+<span class="text-[10px] bg-surface-container-high px-2 py-1 rounded text-on-surface-variant">Public</span>
+<span class="text-[10px] bg-surface-container-high px-2 py-1 rounded text-on-surface-variant">Mon-Fri</span>
+</div>
+</div>
+<!-- Booking Item 2 -->
+<div class="p-4 bg-surface-container-low rounded-xl border border-outline-variant/30 hover:border-primary/50 transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-unit">
+<span class="text-body-sm font-bold">1 Hour Deep Dive</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-primary">content_copy</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mb-stack-md">Strategic planning &amp; architectural review.</p>
+<div class="flex gap-stack-sm">
+<span class="text-[10px] bg-surface-container-high px-2 py-1 rounded text-on-surface-variant">Private</span>
+<span class="text-[10px] bg-surface-container-high px-2 py-1 rounded text-on-surface-variant">Tue/Thu</span>
+</div>
+</div>
+</div>
+<div class="pt-stack-md border-t border-outline-variant">
+<div class="flex items-center justify-between text-body-sm mb-stack-md">
+<span class="text-on-surface-variant">Available this week</span>
+<span class="font-bold text-primary">78%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[78%]"></div>
+</div>
+</div>
+</div>
+<!-- Minimized Schedule View -->
+<div class="glass-panel rounded-2xl p-6">
+<h3 class="font-bold mb-stack-lg">Today's Timeline</h3>
+<div class="flex flex-col gap-stack-lg relative before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-outline-variant/30">
+<div class="flex gap-stack-lg relative">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest border-4 border-background z-10"></div>
+<div>
+<p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">Done • 09:00 AM</p>
+<p class="text-body-sm font-medium">Email Triage (AI Optimized)</p>
+</div>
+</div>
+<div class="flex gap-stack-lg relative">
+<div class="w-6 h-6 rounded-full bg-primary border-4 border-background z-10 shadow-[0_0_10px_rgba(193,193,255,0.4)]"></div>
+<div>
+<p class="text-[10px] text-primary font-bold uppercase tracking-widest">Active • 10:00 AM</p>
+<p class="text-body-sm font-medium">Revenue Review Meeting</p>
+</div>
+</div>
+<div class="flex gap-stack-lg relative">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest border-4 border-background z-10"></div>
+<div>
+<p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">Upcoming • 02:00 PM</p>
+<p class="text-body-sm font-medium">Deep Work: Interface Design</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interactions for calendar cells
+        document.querySelectorAll('.calendar-grid-cell').forEach(cell => {
+            cell.addEventListener('mousedown', () => {
+                cell.style.transform = 'scale(0.98)';
+            });
+            cell.addEventListener('mouseup', () => {
+                cell.style.transform = 'scale(1)';
+            });
+        });
+
+        // Search bar focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-105');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-105');
+        });
+    </script>
+</body></html>

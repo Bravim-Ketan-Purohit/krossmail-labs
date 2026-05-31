@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nexus Mail - Inbox</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#c1c1ff",
+                        "on-secondary-container": "#bea8ff",
+                        "on-primary": "#1500a8",
+                        "inverse-surface": "#e5e2e1",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "primary": "#c1c1ff",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-primary-fixed-variant": "#2b20d2",
+                        "on-surface-variant": "#c7c4d8",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#4f319c",
+                        "on-background": "#e5e2e1",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-highest": "#353534",
+                        "surface-container-low": "#1c1b1b",
+                        "on-secondary-fixed": "#21005e",
+                        "inverse-primary": "#4643e9",
+                        "surface-tint": "#c1c1ff",
+                        "secondary-fixed-dim": "#cebdff",
+                        "surface-container": "#201f1f",
+                        "tertiary-container": "#bf5200",
+                        "on-tertiary": "#552000",
+                        "on-tertiary-container": "#fff9f7",
+                        "on-error": "#690005",
+                        "secondary-fixed": "#e8ddff",
+                        "background": "#131313",
+                        "tertiary-fixed": "#ffdbcb",
+                        "outline": "#908fa1",
+                        "primary-fixed": "#e1dfff",
+                        "on-primary-container": "#fdf9ff",
+                        "on-secondary": "#381385",
+                        "secondary-container": "#4f319c",
+                        "tertiary": "#ffb691",
+                        "on-primary-fixed": "#09006b",
+                        "surface-variant": "#353534",
+                        "on-surface": "#e5e2e1",
+                        "surface-bright": "#3a3939",
+                        "inverse-on-surface": "#313030",
+                        "surface": "#131313",
+                        "surface-dim": "#131313",
+                        "secondary": "#cebdff",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed": "#341100",
+                        "outline-variant": "#464556",
+                        "primary-container": "#5d5cff",
+                        "on-tertiary-fixed-variant": "#793100"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "12px",
+                        "max-width-content": "1200px",
+                        "stack-lg": "24px",
+                        "stack-sm": "4px",
+                        "unit": "8px",
+                        "gutter": "16px",
+                        "container-margin": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "label-md": ["Geist"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .active-tab { font-variation-settings: 'FILL' 1; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #353534; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #464556; }
+        .glass { backdrop-filter: blur(20px); background: rgba(19, 19, 19, 0.8); }
+        .ai-shimmer {
+            background: linear-gradient(90deg, transparent, rgba(193, 193, 255, 0.05), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite linear;
+        }
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-hidden">
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-0 bottom-0 flex flex-col p-container-margin w-[280px] h-screen border-r border-outline-variant bg-surface z-50">
+<div class="mb-stack-lg">
+<h1 class="font-headline-md text-headline-md font-bold text-primary mb-1">Nexus Mail</h1>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">AI-Powered</p>
+</div>
+<button class="mb-stack-lg w-full py-3 px-4 bg-primary-container text-on-primary-container rounded-xl font-headline-sm flex items-center justify-center gap-2 active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+            Compose
+        </button>
+<nav class="flex-1 flex flex-col gap-1 overflow-y-auto">
+<!-- Navigation Items -->
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-primary font-bold hover:bg-surface-container-high transition-colors active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined active-tab" data-icon="inbox">inbox</span>
+<span class="font-body-md">Inbox</span>
+<span class="ml-auto text-xs bg-primary/20 text-primary px-2 py-0.5 rounded-full">12</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-body-md">Calendar</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="drafts">drafts</span>
+<span class="font-body-md">Drafts</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+<span class="font-body-md">Sent</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+<span class="font-body-md">Trash</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-1 pt-stack-lg border-t border-outline-variant/30">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-body-md">Help</span>
+</a>
+<div class="flex items-center gap-3 px-4 py-4 mt-2 bg-surface-container-low rounded-xl">
+<img alt="User Profile" class="w-10 h-10 rounded-full border-2 border-primary/20" data-alt="A professional headshot of a young male creative with a slight smile, wearing a modern dark turtleneck, set against a blurred urban studio background with cool, cinematic lighting. The image emphasizes high-end professional quality and a clean minimalist aesthetic consistent with a luxury productivity app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6KeMum5WHeufkMf5qAZmBvcm7YhehIWpPtULCVUGDSIKis1oyi4hllxmYGZWazsaqjcs1OrLs_lhYcgOgXzPc3dJ_uOxc9mjbWnVmVNgbnhQq9eUFn4c5CpezhSq1MbvNbJXaf_WAO1sPD2H1dsd4RjWc-Kdzkda70_2d04g78Ub2PySX7yjPO7-OjoIbQRU4Uc8XELd97-JT0kJ3clfceBINQAEkP6613echvvPCYD338QBA_X87TwVIxtcj9iiYyikFWjPQ8wsU"/>
+<div class="overflow-hidden">
+<p class="font-body-sm font-bold text-on-surface truncate">Alex Rivera</p>
+<p class="font-label-md text-on-surface-variant truncate">alex@nexusmail.ai</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 right-0 flex items-center justify-between px-gutter h-16 w-[calc(100%-280px)] ml-[280px] z-40 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10">
+<div class="flex items-center flex-1 max-w-2xl">
+<div class="relative w-full group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full pl-12 pr-4 py-2 text-body-sm focus:ring-2 focus:ring-primary transition-all placeholder:text-on-surface-variant/50" placeholder="Search emails, events, or files..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-stack-lg ml-gutter">
+<!-- View Toggle -->
+<div class="flex items-center bg-surface-container-low p-1 rounded-full">
+<button class="px-4 py-1.5 rounded-full text-label-md transition-all text-on-surface-variant hover:text-on-surface">Focus</button>
+<button class="px-4 py-1.5 rounded-full text-label-md bg-primary-container text-on-primary-container shadow-lg font-bold">Classic</button>
+</div>
+<div class="h-6 w-px bg-outline-variant/30"></div>
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-high border border-primary/20 text-primary font-bold hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                Ask AI
+            </button>
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full ring-2 ring-surface"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-[280px] mt-16 h-[calc(100vh-64px)] overflow-hidden flex flex-col">
+<!-- Filter Bar -->
+<section class="px-gutter py-stack-md flex items-center justify-between border-b border-outline-variant/10 bg-surface/50">
+<div class="flex items-center gap-4 overflow-x-auto no-scrollbar">
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary/10 text-primary font-bold text-body-sm">
+                    All Mail
+                </button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low text-body-sm transition-colors">
+                    Unread
+                    <span class="text-xs bg-surface-container-high px-1.5 py-0.5 rounded">12</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low text-body-sm transition-colors">
+<span class="material-symbols-outlined text-[18px]">flag</span>
+                    Flagged
+                </button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low text-body-sm transition-colors">
+<span class="material-symbols-outlined text-[18px]">attach_file</span>
+                    Attachments
+                </button>
+<div class="h-4 w-px bg-outline-variant/30"></div>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low text-body-sm transition-colors">
+                    Latest First
+                    <span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-label-md text-on-surface-variant">1-50 of 1,248</span>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded-md hover:bg-surface-container-low text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">chevron_left</span></button>
+<button class="p-1.5 rounded-md hover:bg-surface-container-low text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">chevron_right</span></button>
+</div>
+</div>
+</section>
+<!-- Dense List View Content -->
+<section class="flex-1 overflow-y-auto scroll-smooth">
+<!-- Table Header (Sticky) -->
+<div class="sticky top-0 z-10 grid grid-cols-[48px_1.5fr_3fr_120px] px-gutter py-3 bg-surface border-b border-outline-variant/20 text-label-md text-on-surface-variant font-bold uppercase tracking-wider">
+<div class="flex justify-center"><input class="rounded border-outline-variant bg-transparent text-primary focus:ring-primary ring-offset-background" type="checkbox"/></div>
+<div>Sender</div>
+<div>Subject &amp; Snippet</div>
+<div class="text-right">Date</div>
+</div>
+<!-- Email Rows -->
+<div class="divide-y divide-outline-variant/5">
+<!-- Email Row 1 (Unread) -->
+<div class="grid grid-cols-[48px_1.5fr_3fr_120px] px-gutter py-3.5 hover:bg-surface-container-low transition-colors group cursor-pointer border-l-2 border-l-transparent hover:border-l-primary relative">
+<div class="flex justify-center items-center"><input class="rounded border-outline-variant bg-transparent text-primary focus:ring-primary ring-offset-background" type="checkbox"/></div>
+<div class="flex items-center gap-3 font-bold text-on-surface">
+<div class="w-2 h-2 rounded-full bg-primary ring-4 ring-primary/10"></div>
+                        Julian Vance
+                    </div>
+<div class="flex items-center gap-2 truncate">
+<span class="font-bold text-on-surface">Q3 Strategy Alignment</span>
+<span class="text-on-surface-variant">— Hi Alex, let's look at the quarterly projections and see if we can optimize the AI training loop for...</span>
+<span class="ml-auto flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">archive</span></button>
+<button class="p-1 hover:text-error transition-colors"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+<button class="p-1 hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[18px]">mark_email_read</span></button>
+</span>
+</div>
+<div class="text-right text-body-sm text-on-surface-variant font-medium pt-1">9:41 AM</div>
+</div>
+<!-- Email Row 2 (With AI Summary Highlight) -->
+<div class="grid grid-cols-[48px_1.5fr_3fr_120px] px-gutter py-3.5 hover:bg-surface-container-low transition-colors group cursor-pointer border-l-2 border-l-transparent hover:border-l-primary bg-primary/5 ai-shimmer">
+<div class="flex justify-center items-center"><input class="rounded border-outline-variant bg-transparent text-primary focus:ring-primary ring-offset-background" type="checkbox"/></div>
+<div class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                        Nexus AI
+                    </div>
+<div class="flex items-center gap-2 truncate">
+<span class="text-primary font-bold">Daily Briefing</span>
+<span class="text-on-surface-variant">— You have 3 urgent items requiring action before the 2 PM product sync...</span>
+<span class="bg-primary/20 text-primary text-[10px] px-1.5 py-0.5 rounded font-bold uppercase ml-2">Smart</span>
+</div>
+<div class="text-right text-body-sm text-on-surface font-bold pt-1">8:15 AM</div>
+</div>
+<!-- Email Row 3 (Read) -->
+<div class="grid grid-cols-[48px_1.5fr_3fr_120px] px-gutter py-3.5 hover:bg-surface-container-low transition-colors group cursor-pointer border-l-2 border-l-transparent hover:border-l-primary">
+<div class="flex justify-center items-center"><input class="rounded border-outline-variant bg-transparent text-primary focus:ring-primary ring-offset-background" type="checkbox"/></div>
+<div class="text-on-surface-variant font-medium">Design System Lead</div>
+<div class="flex items-center gap-2 truncate text-on-surface-variant">
+<span>New Token Manifest</span>
+<span class="text-on-surface-variant/60">— Updated the glassmorphism tokens for the sidebar navigation...</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant/40">attach_file</span>
+</div>
+<div class="text-right text-body-sm text-on-surface-variant pt-1">Yesterday</div>
+</div>
+<!-- Email Row 4 (Flagged) -->
+<div class="grid grid-cols-[48px_1.5fr_3fr_120px] px-gutter py-3.5 hover:bg-surface-container-low transition-colors group cursor-pointer border-l-2 border-l-transparent hover:border-l-primary">
+<div class="flex justify-center items-center"><input class="rounded border-outline-variant bg-transparent text-primary focus:ring-primary ring-offset-background" type="checkbox"/></div>
+<div class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined text-tertiary text-[20px]" style="font-variation-settings: 'FILL' 1;">flag</span>
+                        Venture X Partners
+                    </div>
+<div class="flex items-center gap-2 truncate text-on-surface">
+<span class="font-bold">Follow up: Series B Roadmap</span>
+<span class="text-on-surface-variant">— The deck looks solid. Let's schedule a call for next Wednesday to...</span>
+</div>
+<div class="text-right text-body-sm text-on-surface-variant pt-1">Oct 24</div>
+</div>
+<!-- Row Placeholder Loop -->
+<div class="grid grid-cols-[48px_1.5fr_3fr_120px] px-gutter py-3.5 hover:bg-surface-container-low transition-colors group cursor-pointer border-l-2 border-l-transparent hover:border-l-primary">
+<div class="flex justify-center items-center"><input class="rounded border-outline-variant bg-transparent text-primary focus:ring-primary ring-offset-background" type="checkbox"/></div>
+<div class="text-on-surface-variant">Stripe</div>
+<div class="flex items-center gap-2 truncate text-on-surface-variant">
+<span>Monthly Subscription Active</span>
+<span class="text-on-surface-variant/60">— Thank you for your continued support of the Nexus Mail Premium plan...</span>
+</div>
+<div class="text-right text-body-sm text-on-surface-variant pt-1">Oct 22</div>
+</div>
+<div class="grid grid-cols-[48px_1.5fr_3fr_120px] px-gutter py-3.5 hover:bg-surface-container-low transition-colors group cursor-pointer border-l-2 border-l-transparent hover:border-l-primary">
+<div class="flex justify-center items-center"><input class="rounded border-outline-variant bg-transparent text-primary focus:ring-primary ring-offset-background" type="checkbox"/></div>
+<div class="text-on-surface-variant">GitHub</div>
+<div class="flex items-center gap-2 truncate text-on-surface-variant">
+<span>[nexus-core] Pull request #428 opened</span>
+<span class="text-on-surface-variant/60">— feature/ai-summarization-v2-proto has been submitted for review...</span>
+</div>
+<div class="text-right text-body-sm text-on-surface-variant pt-1">Oct 21</div>
+</div>
+<div class="grid grid-cols-[48px_1.5fr_3fr_120px] px-gutter py-3.5 hover:bg-surface-container-low transition-colors group cursor-pointer border-l-2 border-l-transparent hover:border-l-primary">
+<div class="flex justify-center items-center"><input class="rounded border-outline-variant bg-transparent text-primary focus:ring-primary ring-offset-background" type="checkbox"/></div>
+<div class="text-on-surface-variant">Figma Notifications</div>
+<div class="flex items-center gap-2 truncate text-on-surface-variant">
+<span>Elena commented on 'Nexus_V2_Main'</span>
+<span class="text-on-surface-variant/60">— "Can we make the hover state on rows even more subtle?"</span>
+</div>
+<div class="text-right text-body-sm text-on-surface-variant pt-1">Oct 20</div>
+</div>
+<div class="grid grid-cols-[48px_1.5fr_3fr_120px] px-gutter py-3.5 hover:bg-surface-container-low transition-colors group cursor-pointer border-l-2 border-l-transparent hover:border-l-primary">
+<div class="flex justify-center items-center"><input class="rounded border-outline-variant bg-transparent text-primary focus:ring-primary ring-offset-background" type="checkbox"/></div>
+<div class="text-on-surface-variant">Linear</div>
+<div class="flex items-center gap-2 truncate text-on-surface-variant">
+<span>Issue NEX-104 assigned to you</span>
+<span class="text-on-surface-variant/60">— Implement dense list view toggle for power users...</span>
+</div>
+<div class="text-right text-body-sm text-on-surface-variant pt-1">Oct 19</div>
+</div>
+<!-- Bottom Fade for infinite scroll effect -->
+<div class="h-24 bg-gradient-to-t from-background to-transparent pointer-events-none sticky bottom-0"></div>
+</div>
+</section>
+</main>
+<!-- Contextual FAB (Only for main screens) -->
+<div class="fixed bottom-gutter right-gutter z-50">
+<button class="w-14 h-14 bg-primary text-on-primary rounded-2xl shadow-2xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all group overflow-hidden relative">
+<span class="material-symbols-outlined text-[28px] relative z-10">auto_awesome</span>
+<div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+</button>
+</div>
+<script>
+        // Simple Interaction logic for unread toggle
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('click', (e) => e.stopPropagation());
+        });
+
+        // Search bar focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            document.querySelector('.max-width-content')?.classList.add('opacity-50');
+        });
+        searchInput.addEventListener('blur', () => {
+            document.querySelector('.max-width-content')?.classList.remove('opacity-50');
+        });
+
+        // Row click effect
+        document.querySelectorAll('.grid-cols-\\[48px_1\\.5fr_3fr_120px\\]').forEach(row => {
+            if(!row.querySelector('div.sticky')) {
+                row.addEventListener('click', () => {
+                    const subject = row.querySelector('span.font-bold')?.innerText || 'Email';
+                    console.log(`Opening: ${subject}`);
+                    // Potential navigation logic here
+                });
+            }
+        });
+    </script>
+</body></html>

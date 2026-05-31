@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nexus Mail - Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#353534",
+                        "on-tertiary-container": "#fff9f7",
+                        "on-surface-variant": "#c7c4d8",
+                        "tertiary-container": "#bf5200",
+                        "tertiary-fixed": "#ffdbcb",
+                        "on-primary-fixed": "#09006b",
+                        "surface": "#131313",
+                        "primary-container": "#5d5cff",
+                        "on-tertiary-fixed-variant": "#793100",
+                        "inverse-on-surface": "#313030",
+                        "primary": "#c1c1ff",
+                        "background": "#131313",
+                        "surface-dim": "#131313",
+                        "on-tertiary-fixed": "#341100",
+                        "inverse-primary": "#4643e9",
+                        "error": "#ffb4ab",
+                        "secondary-container": "#4f319c",
+                        "on-primary-fixed-variant": "#2b20d2",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "on-background": "#e5e2e1",
+                        "on-error": "#690005",
+                        "on-secondary-container": "#bea8ff",
+                        "on-primary-container": "#fdf9ff",
+                        "on-secondary-fixed-variant": "#4f319c",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "tertiary": "#ffb691",
+                        "primary-fixed-dim": "#c1c1ff",
+                        "surface-tint": "#c1c1ff",
+                        "secondary-fixed-dim": "#cebdff",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-variant": "#353534",
+                        "secondary-fixed": "#e8ddff",
+                        "on-secondary-fixed": "#21005e",
+                        "surface-container": "#201f1f",
+                        "on-secondary": "#381385",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-bright": "#3a3939",
+                        "outline": "#908fa1",
+                        "secondary": "#cebdff",
+                        "on-surface": "#e5e2e1",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container-low": "#1c1b1b",
+                        "primary-fixed": "#e1dfff",
+                        "outline-variant": "#464556",
+                        "on-tertiary": "#552000",
+                        "on-primary": "#1500a8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-lg": "24px",
+                        "max-width-content": "1200px",
+                        "stack-md": "12px",
+                        "stack-sm": "4px",
+                        "gutter": "16px",
+                        "container-margin": "24px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-md": ["Geist"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .ai-shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+        .ai-shimmer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(193, 193, 255, 0.2), transparent);
+            transform: skewX(-20deg);
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer {
+            100% {
+                left: 200%;
+            }
+        }
+        .glass-card {
+            background: rgba(18, 18, 18, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .connection-card {
+            transition: all 0.3s ease;
+        }
+        .connection-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(193, 193, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(193, 193, 255, 0.05);
+        }
+        .connection-card.selected {
+            border-color: theme('colors.primary');
+            background: theme('colors.surface-container-high');
+        }
+        .btn-primary-gradient {
+            background: linear-gradient(135deg, theme('colors.primary-container') 0%, theme('colors.secondary-container') 100%);
+        }
+        .ambient-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(93, 92, 255, 0.1) 0%, rgba(19, 19, 19, 0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col font-sans antialiased overflow-x-hidden relative">
+<!-- Ambient Background Glow -->
+<div class="ambient-glow"></div>
+<!-- Header -->
+<header class="w-full flex items-center justify-between p-gutter md:px-container-margin md:py-stack-lg z-10">
+<div class="flex items-center gap-unit">
+<span class="material-symbols-outlined text-primary font-headline-md" style="font-variation-settings: 'FILL' 1;">mail</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">Nexus Mail</span>
+</div>
+<div class="hidden md:flex items-center gap-unit px-3 py-1 rounded-full border border-outline-variant/30 bg-surface-container-low text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+            Powered by Nexus AI
+        </div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center px-gutter py-stack-lg w-full max-w-content mx-auto z-10 relative">
+<!-- Header Section -->
+<div class="text-center mb-stack-lg max-w-2xl">
+<h1 class="font-display-lg text-headline-lg-mobile md:text-display-lg mb-stack-sm tracking-tight text-on-surface">
+                Connect your world.
+            </h1>
+<h2 class="font-headline-md text-headline-sm md:text-headline-md text-on-surface-variant mb-stack-md font-medium">
+                One unified chat-style inbox.
+            </h2>
+<p class="font-body-md text-body-md text-on-surface-variant/80 max-w-md mx-auto">
+                Securely connect your existing accounts. Nexus AI automatically organizes your threads, surfaces important updates, and drafts intelligent replies.
+            </p>
+</div>
+<!-- Connection Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter w-full max-w-4xl mb-stack-lg">
+<!-- Gmail Card -->
+<div class="connection-card glass-card rounded-xl p-stack-md flex flex-col items-center justify-center text-center cursor-pointer min-h-[200px] relative overflow-hidden group" onclick="toggleSelection(this)">
+<div class="absolute top-3 right-3 opacity-0 group-[.selected]:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="w-16 h-16 bg-surface rounded-full flex items-center justify-center mb-stack-sm shadow-sm border border-outline-variant/20">
+<img alt="Gmail Logo" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9MJBk0sMmD2hPvjjtxD81qwfNHc-ih6MrnHc_2dIGsaramH13ZGhAhZVCe04E93Z0-6lBwptHCYkUiWBdSFB2-HVS7wShS1jeOBcURRtkhXBnYOQXk67wYNGAtIePXuunkZYl0kWMW45-hWmkVU8pRmhuT9tnjN6ls4bcM62wABi0z6oewxeyUxHeK1I_VuqmEA-_Q8g1KysuNnkK4oZFxhZriCJNEYmBY3H6oqcXv4OqSn0Ix3Os8e0ViLYFSknsfHXGMhaP92q-"/>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-unit">Google</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Connect your Gmail accounts</p>
+</div>
+<!-- Outlook Card -->
+<div class="connection-card glass-card rounded-xl p-stack-md flex flex-col items-center justify-center text-center cursor-pointer min-h-[200px] relative overflow-hidden group" onclick="toggleSelection(this)">
+<div class="absolute top-3 right-3 opacity-0 group-[.selected]:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="w-16 h-16 bg-surface rounded-full flex items-center justify-center mb-stack-sm shadow-sm border border-outline-variant/20">
+<img alt="Outlook Logo" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7-k1rrnyaeceWZ1MxlIpBc_5PjOeYxJtIBQLKZDLUg20THlt0wYXuLkMzmESxydG1KjO3NWQuh_0hiYdRw-82FrBxLTzxYu388tBGSKhnzMaLp-IIQgwdR26YuIzrwD-EpArmXQQLndNMBX3B7E7fsijkiVuSJyA3hO-5-v-zpw8n1rf5TnHgObHjCVqV3E76w56AEYxHwHXLCJvXpI-w-M1iaBtCrlCmhF4YwZnrxdxNGm5qA0ddivtwR4PK83E7YT44LBFSyqDH"/>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-unit">Microsoft</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Connect Outlook or Office 365</p>
+</div>
+<!-- Apple Mail Card -->
+<div class="connection-card glass-card rounded-xl p-stack-md flex flex-col items-center justify-center text-center cursor-pointer min-h-[200px] relative overflow-hidden group" onclick="toggleSelection(this)">
+<div class="absolute top-3 right-3 opacity-0 group-[.selected]:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="w-16 h-16 bg-surface rounded-full flex items-center justify-center mb-stack-sm shadow-sm border border-outline-variant/20">
+<span class="material-symbols-outlined text-[32px] text-on-surface">cloud</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-unit">Apple</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Connect iCloud Mail</p>
+</div>
+</div>
+<!-- Privacy Assurance -->
+<div class="flex items-center justify-center gap-unit text-on-surface-variant/70 font-label-md text-label-md mb-stack-lg">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span>Your credentials are encrypted end-to-end. We never store your passwords.</span>
+</div>
+<!-- Action Area -->
+<div class="flex flex-col sm:flex-row items-center gap-gutter w-full max-w-md">
+<button class="w-full sm:w-auto flex-1 py-3 px-6 rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container-high transition-colors font-label-md text-label-md uppercase tracking-wider">
+                Skip for now
+            </button>
+<button class="w-full sm:w-auto flex-1 py-3 px-6 rounded-lg btn-primary-gradient text-on-primary-container font-label-md text-label-md uppercase tracking-wider shadow-lg opacity-50 cursor-not-allowed transition-all duration-300 ai-shimmer" disabled="" id="continueBtn">
+                Continue
+            </button>
+</div>
+</main>
+<!-- Decorative Bottom Gradient -->
+<div class="fixed bottom-0 left-0 w-full h-32 bg-gradient-to-t from-surface-container-lowest to-transparent pointer-events-none z-0"></div>
+<script>
+        function toggleSelection(element) {
+            element.classList.toggle('selected');
+            updateContinueButton();
+        }
+
+        function updateContinueButton() {
+            const selectedCards = document.querySelectorAll('.connection-card.selected');
+            const continueBtn = document.getElementById('continueBtn');
+            
+            if (selectedCards.length > 0) {
+                continueBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                continueBtn.classList.add('hover:opacity-90', 'transform', 'hover:scale-[1.02]');
+                continueBtn.removeAttribute('disabled');
+            } else {
+                continueBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                continueBtn.classList.remove('hover:opacity-90', 'transform', 'hover:scale-[1.02]');
+                continueBtn.setAttribute('disabled', 'true');
+            }
+        }
+    </script>
+</body></html>
