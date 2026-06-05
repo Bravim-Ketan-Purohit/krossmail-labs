@@ -107,16 +107,14 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    // Add to Resend Audience if configured
-    const audienceId = process.env.RESEND_AUDIENCE_ID;
-    if (audienceId) {
-      await resend.contacts.create({ email, audienceId });
-    }
+    // Add to Resend Contacts (global — no audience ID needed)
+    await resend.contacts.create({ email, unsubscribed: false });
 
     // Send confirmation email
     await resend.emails.send({
-      from: "Kross <onboarding@resend.dev>",
+      from: "Kross <waitlist@liwilabs.com>",
       to: email,
+      replyTo: "founder@liwilabs.com",
       subject: "You're on the Kross waitlist ✦",
       html: confirmationHtml,
     });
