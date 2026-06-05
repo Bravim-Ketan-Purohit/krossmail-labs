@@ -46,38 +46,62 @@ services:
 
   auth-service:
     build: ./services/auth-service
-    ports: ["3001:3001"]
+    ports: ["3001:8000"]
     depends_on: [postgres, redis, localstack]
+    environment:
+      DATABASE_URL: postgresql://kross:kross@postgres:5432/kross
+      REDIS_URL: redis://redis:6379
+      AWS_REGION: us-east-1
 
   sync-service:
     build: ./services/sync-service
-    ports: ["3002:3002"]
+    ports: ["3002:8000"]
     depends_on: [postgres, redis, localstack]
+    environment:
+      DATABASE_URL: postgresql://kross:kross@postgres:5432/kross
+      REDIS_URL: redis://redis:6379
+      AWS_REGION: us-east-1
 
   ai-service:
     build: ./services/ai-service
-    ports: ["3003:3003"]
+    ports: ["3003:8000"]
     depends_on: [localstack, ollama]
+    environment:
+      OLLAMA_BASE_URL: http://ollama:11434
+      AWS_REGION: us-east-1
 
   rag-service:
     build: ./services/rag-service
-    ports: ["3004:3004"]
+    ports: ["3004:8000"]
     depends_on: [postgres, localstack, ollama]
+    environment:
+      DATABASE_URL: postgresql://kross:kross@postgres:5432/kross
+      OLLAMA_BASE_URL: http://ollama:11434
+      AWS_REGION: us-east-1
 
   calendar-service:
     build: ./services/calendar-service
-    ports: ["3005:3005"]
+    ports: ["3005:8000"]
     depends_on: [postgres, redis]
+    environment:
+      DATABASE_URL: postgresql://kross:kross@postgres:5432/kross
+      REDIS_URL: redis://redis:6379
 
   file-service:
     build: ./services/file-service
-    ports: ["3006:3006"]
+    ports: ["3006:8000"]
     depends_on: [postgres, localstack]
+    environment:
+      DATABASE_URL: postgresql://kross:kross@postgres:5432/kross
+      AWS_REGION: us-east-1
 
   notification-service:
     build: ./services/notification-service
-    ports: ["3007:3007"]
+    ports: ["3007:8000"]
     depends_on: [redis, localstack]
+    environment:
+      REDIS_URL: redis://redis:6379
+      AWS_REGION: us-east-1
 
 volumes:
   pgdata:

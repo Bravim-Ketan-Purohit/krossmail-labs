@@ -39,6 +39,16 @@ crash.log
 # Local screenshots (prototype QA artifacts)
 /*.png
 
+# Fine-tuning datasets (large files — never commit)
+fine-tuning/datasets/
+!fine-tuning/datasets/.gitkeep
+
+# Python virtualenvs
+.venv/
+__pycache__/
+*.pyc
+
 # Logs
 *.log
 npm-debug.log*
+.gstack/

@@ -1,19 +1,13 @@
-# --- build stage ---
-FROM node:22-alpine AS build
+FROM python:3.12-slim AS builder
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 WORKDIR /app
-COPY package.json ./
-RUN npm install
-COPY tsconfig.json ./
-COPY src ./src
-RUN npm run build
+COPY pyproject.toml uv.lock ./
+RUN uv sync --frozen --no-dev
 
-# --- runtime stage ---
-FROM node:22-alpine AS runtime
+FROM python:3.12-slim AS runtime
 WORKDIR /app
-ENV NODE_ENV=production
-COPY package.json ./
-RUN npm install --omit=dev
-COPY --from=build /app/dist ./dist
-EXPOSE 3003
-USER node
-CMD ["node", "dist/index.js"]
+COPY --from=builder /app/.venv .venv
+COPY src/ src/
+ENV PATH="/app/.venv/bin:$PATH"
+HEALTHCHECK CMD curl -f http://localhost:8000/health || exit 1
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]

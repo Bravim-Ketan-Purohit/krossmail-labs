@@ -4,9 +4,7 @@
   "private": true,
   "description": "Kross — AI-powered unified email + calendar (Gmail + Outlook).",
   "workspaces": [
-    "frontend",
-    "packages/*",
-    "services/*"
+    "packages/*"
   ],
   "scripts": {
     "build": "npm run build --workspace @kross/frontend",
@@ -15,5 +13,6 @@
   },
   "engines": {
     "node": ">=22"
-  }
+  },
+  "packageManager": "npm@11.6.0"
 }

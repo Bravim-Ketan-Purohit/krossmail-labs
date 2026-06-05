@@ -7,7 +7,7 @@ on:
 
 jobs:
   node:
-    name: Lint, test & build (Node)
+    name: Frontend — lint, test & build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,10 +16,36 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Unit + integration tests (all workspaces)
+      - name: Unit tests (packages/*)
         run: npm run test --workspaces --if-present
       - name: Build frontend
-        run: npm run build --workspace @kross/frontend
+        working-directory: frontend
+        run: npm ci && npm run build
+
+  python:
+    name: Services — pytest
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service:
+          - auth-service
+          - sync-service
+          - ai-service
+          - rag-service
+          - calendar-service
+          - file-service
+          - notification-service
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
+      - name: Install deps
+        working-directory: services/${{ matrix.service }}
+        run: uv sync --frozen
+      - name: Run tests
+        working-directory: services/${{ matrix.service }}
+        run: uv run pytest
 
   iac:
     name: Terraform validate

@@ -1,0 +1,54 @@
+from .base import Thread, Message, make_id, passes_quality_gate
+
+# Dataset: aadilsayad/email-intent-classification
+# Run print(ds[0]) on first load to confirm exact column names.
+
+
+def normalise(record: dict) -> Thread | None:
+    try:
+        body = (record.get("text") or record.get("body") or record.get("email") or "").strip()
+        subject = (record.get("subject") or "").strip()
+        intent = record.get("intent") or record.get("label") or ""
+
+        thread = Thread(
+            thread_id=make_id("intent"),
+            source="intent",
+            subject=subject or "(no subject)",
+            messages=[Message(
+                from_name="Sender",
+                from_email="sender@company.com",
+                to_name="Recipient",
+                to_email="recipient@company.com",
+                body=body,
+            )],
+            thread_depth=1,
+            hint_category=str(intent) if intent else None,
+        )
+
+        passes, reason = passes_quality_gate(thread)
+        if not passes:
+            return None
+        return thread
+
+    except Exception:
+        return None
+
+
+def load_and_normalise(max_records: int = 3000) -> list[Thread]:
+    from datasets import load_dataset
+    print(f"Loading email-intent-classification (max {max_records} records)...")
+    ds = load_dataset("aadilsayad/email-intent-classification", split="train")
+
+    print("Columns:", ds.features)
+    print("Sample:", ds[0])
+
+    results = []
+    for record in ds:
+        if len(results) >= max_records:
+            break
+        thread = normalise(record)
+        if thread:
+            results.append(thread)
+
+    print(f"Intent: {len(ds)} raw → {len(results)} valid threads")
+    return results
