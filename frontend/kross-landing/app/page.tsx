@@ -305,7 +305,7 @@ export default function Page() {
 
       {/* NAV */}
       <nav className="nav" ref={navRef}>
-        <div className="brand"><span className="brand-mark">K</span> Kross</div>
+        <div className="brand"><Image src="/logo.svg" alt="LiwiLabs" width={120} height={36} style={{ height: 32, width: "auto" }} priority unoptimized /></div>
         <a className="nav-cta" href="#waitlist" data-hot="">Join the waitlist</a>
       </nav>
 
@@ -380,7 +380,7 @@ export default function Page() {
         </div>
         <div className="wrap">
           <div className="reveal"><div className="this-is">This is Kross.</div></div>
-          <div className="reveal d1"><div className="kross-mark"><span className="m">K</span><span className="kross-word">KROSS</span></div></div>
+          <div className="reveal d1"><div className="kross-mark"><Image src="/logo.svg" alt="LiwiLabs" width={280} height={280} style={{ height: 180, width: "auto" }} unoptimized /></div></div>
           <div className="reveal d2">
             <p className="tagline">Cross-connect your email with AI. <span className="g">One inbox. Every account. Zero chaos.</span></p>
           </div>
@@ -750,7 +750,7 @@ export default function Page() {
       </section>
 
       <footer className="foot">
-        <div className="fb"><span className="brand-mark">K</span> Kross</div>
+        <div className="fb"><Image src="/logo.svg" alt="LiwiLabs" width={80} height={24} style={{ height: 22, width: "auto" }} unoptimized /></div>
         One inbox. Every account. Zero chaos.
       </footer>
     </>
